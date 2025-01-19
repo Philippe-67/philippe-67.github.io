@@ -104,3 +104,33 @@ ul {
 li {
     margin-bottom: 5px;
 }
+footer {
+    background-color: #4CAF50; /* Couleur de fond du footer */
+    color: white; /* Couleur du texte */
+    text-align: center; /* Centre le texte */
+    padding: 10px 0; /* Padding pour donner de l'espace */
+    position: relative; /* Position relative pour le footer */
+    bottom: 0; /* Positionné en bas */
+    width: 100%; /* Prend toute la largeur */
+}
+
+footer nav ul {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0; /* Enlève le padding */
+    margin: 0; /* Enlève la marge */
+}
+
+footer nav ul li {
+    display: inline; /* Affiche les éléments de la liste en ligne */
+    margin-right: 15px; /* Espace entre les liens */
+}
+
+footer nav ul li a {
+    color: white; /* Couleur des liens */
+    text-decoration: none; /* Supprime le soulignement */
+}
+
+footer nav ul li a:hover {
+    text-decoration: underline; /* Souligne le lien au survol */
+}
+
