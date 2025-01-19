@@ -66,29 +66,20 @@ nav {
         width: 100%; /* Chaque élément prend toute la largeur */
         margin: 0; /* Supprime la marge pour éviter des espaces inutiles */
     }
-/* Ajouter une marge à gauche pour tous les éléments sauf h1 et nav */
-.container, section, h2, p, ul, li, .definition, .uses, .examples {
-    margin-left: 30px; /* Ajustez la valeur selon vos préférences */
 }
 
 /* Ajustement des sections pour éviter le masquage du contenu */
 .container {
-    margin-top: 30px; /* Ajustez cette valeur selon la hauteur de votre titre et de votre barre de navigation */
+    margin-top: 140px; /* Ajustez cette valeur selon la hauteur de votre titre et de votre barre de navigation */
 }
 
 /* Styles pour les sections */
 section {
-    padding-top: 140px; /* Ajoutez un padding en haut pour laisser de l'espace pour le titre */
+    padding-top: 20px; /* Ajustez cette valeur pour laisser de l'espace pour le contenu */
     margin-bottom: 20px; /* Espace entre les sections */
-    position: relative; /* Nécessaire pour le positionnement de l'élément fixé */
 }
 
-h2 {
-   // position: relative; /* Nécessaire pour le positionnement de l'élément fixé *////////////////////////
-   // top: -30px; /* Remonte le titre de 60 pixels pour qu'il soit visible *///////////////////////////////
-    margin-top: 0; 
-}
-
+/* Styles pour les définitions, usages et exemples */
 .definition {
     background-color: #e0f7fa; /* Couleur de fond pour la définition */
     padding: 10px;
