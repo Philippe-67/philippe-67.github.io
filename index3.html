@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction au CI/CD avec Azure DevOps</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Introduction au CI/CD (Intégration Continue / Déploiement Continu) avec Azure DevOps</h1>
+
+        <!-- Barre de navigation -->
+        <nav>
+            <ul class="navbar">
+                <li><a href="#definition">Définition</a></li>
+                <li><a href="#importance">Importance du CI/CD</a></li>
+                <li><a href="#integration-continue">Intégration Continue</a></li>
+                <li><a href="#deploiement-continu">Déploiement Continu</a></li>
+                <li><a href="#avantages">Avantages du CI/CD</a></li>
+                <li><a href="#outils">Outils CI/CD</a></li>
+                <li><a href="#exemple-pipeline">Exemple de Pipeline CI/CD</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </nav>
+
+        <section id="definition">
+            <h2>Définition</h2>
+            <p class="definition"><strong>Définition :</strong> CI/CD est une méthode de développement logiciel qui vise à automatiser le processus de livraison de code, en intégrant et en déployant les modifications de manière continue.</p>
+        </section>
+
+        <section id="importance">
+            <h2>Importance du CI/CD</h2>
+            <p>Le CI/CD est essentiel dans le développement moderne, car il permet de livrer des applications rapidement et de manière fiable, tout en minimisant les erreurs humaines.</p>
+        </section>
+
+        <section id="integration-continue">
+            <h2>Intégration Continue</h2>
+            <p class="definition"><strong>Définition :</strong> L'intégration continue (CI) est la pratique consistant à fusionner régulièrement les modifications de code dans un dépôt partagé, après quoi des tests automatisés sont exécutés.</p>
+            <p class="uses"><strong>Objectifs :</strong></p>
+            <ul class="uses-list">
+                <li>Détecter rapidement les erreurs de code.</li>
+                <li>Assurer la qualité du code grâce à des tests automatisés.</li>
+                <li>Réduire le temps nécessaire pour intégrer des modifications.</li>
+            </ul>
+        </section>
+
+        <section id="deploiement-continu">
+            <h2>Déploiement Continu</h2>
+            <p class="definition"><strong>Définition :</strong> Le déploiement continu (CD) est la pratique qui permet de déployer automatiquement les modifications validées dans un environnement de production, rendant les nouvelles fonctionnalités accessibles aux utilisateurs sans intervention manuelle.</p>
+            <p class="uses"><strong>Objectifs :</strong></p>
+            <ul class="uses-list">
+                <li>Rendre la mise en production plus rapide et plus fiable.</li>
+                <li>Assurer une rétroaction rapide des utilisateurs sur les nouvelles fonctionnalités.</li>
+                <li>Minimiser le risque de déploiement grâce à des processus automatisés.</li>
+            </ul>
+        </section>
+
+        <section id="avantages">
+            <h2>Avantages du CI/CD</h2>
+            <p>Le CI/CD offre plusieurs avantages aux équipes de développement, notamment :</p>
+            <ul class="advantages-list">
+                <li><strong>Réduction des erreurs :</strong> Les tests automatisés réduisent les erreurs humaines.</li>
+                <li><strong>Livraison rapide :</strong> Les nouvelles fonctionnalités peuvent être mises en production rapidement.</li>
+                <li><strong>Meilleure collaboration :</strong> Les équipes peuvent travailler ensemble plus efficacement grâce à des intégrations régulières.</li>
+                <li><strong>Retour d'information rapide :</strong> Les utilisateurs peuvent fournir des commentaires sur les nouvelles versions rapidement.</li>
+            </ul>
+        </section>
+
+        <section id="outils">
+            <h2>Outils CI/CD</h2>
+            <p>Azure DevOps est l'un des outils les plus populaires pour mettre en œuvre le CI/CD. Voici quelques fonctionnalités clés :</p>
+            <ul class="tools-list">
+                <li><strong>Pipelines :</strong> Permet de définir des workflows automatisés pour CI/CD.</li>
+                <li><strong>Repos :</strong> Gestion de code source avec Git.</li>
+                <li><strong>Test Plans :</strong> Outils pour gérer et exécuter des tests.</li>
+                <li><strong>Boards :</strong> Suivi des tâches et gestion des projets.</li>
+            </ul>
+        </section>
+
+        <section id="exemple-pipeline">
+            <h2>Exemple de Pipeline CI/CD</h2>
+            <p>Voici un exemple de fichier YAML pour un pipeline CI/CD dans Azure DevOps :</p>
+            <pre><code>
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    projects: '**/*.csproj'
+    arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+            </code></pre>
+            <p>Ce fichier YAML définit un pipeline qui se déclenche sur des modifications de la branche <strong>main</strong>, restaure les dépendances, construit le projet, publie les artefacts, et les stocke pour un déploiement ultérieur.</p>
+        </section>
+
+        <section id="conclusion">
+            <h2>Conclusion</h2>
+            <p>Le CI/CD avec Azure DevOps est une approche incontournable dans le développement logiciel moderne, permettant d'améliorer la qualité du code et d'accélérer la livraison des fonctionnalités. Comprendre ces concepts est essentiel pour toute personne souhaitant entrer dans le domaine du développement logiciel.</p>
+            <p>Si vous avez des questions supplémentaires ou si vous souhaitez approfondir l'un de ces points, n'hésitez pas à demander !</p>
+        </section>
+    </div>
+</body>
+</html>
