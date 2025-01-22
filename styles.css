@@ -177,3 +177,28 @@ footer nav ul li a:hover {
         grid-template-columns: 1fr;
     }
 }
+/* Section style index4*/
+.commandeGit {
+    background-color: #e0f7fa;
+    padding: 10px;
+    border-left: 5px solid #00796b;
+    margin: 10px 0;
+}
+
+.uses {
+    background-color: #ffe0b2; /* Couleur de fond pour "À quoi ça sert ?" */
+    padding: 10px;
+    border-left: 5px solid #ff9800; /* Bordure à gauche */
+    margin: 10px 0;
+}
+
+.exampleGit {
+    background-color: #fce4ec;
+    padding: 10px;
+    border-left: 5px solid #e91e63;
+    margin: 10px 0;
+}
+
+.titreExempleGit, .titreCommandeGit {
+    font-weight: 700;
+}
