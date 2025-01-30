@@ -1,4 +1,4 @@
-#l'informatique expliquée à pépé
+# L'informatique expliquée à pépé
 
 [Introduction aux Concepts Fondamentaux des Réseaux Informatiques](https://philippe-67.github.io/index1.html)
 
