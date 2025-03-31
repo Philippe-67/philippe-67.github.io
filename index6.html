@@ -1,0 +1,84 @@
+import React from "react";
+import "./yourStyles.css"; // Assurez-vous que le chemin vers votre fichier CSS est correct
+
+const DockerImagesTraining = () => {
+  return (
+    <div className="container">
+      <h1>Formation sur les Images Docker</h1>
+      <nav>
+        <ul className="navbar">
+          <li><a href="#definition">Définition</a></li>
+          <li><a href="#creation">Création d'Images</a></li>
+          <li><a href="#utilisation">Utilisation</a></li>
+          <li><a href="#exemples">Exemples</a></li>
+        </ul>
+      </nav>
+
+      <section id="definition" className="definition">
+        <h2>Définition</h2>
+        <p>Une image Docker est un modèle léger, autonome et exécutable qui inclut tout ce qu'il faut pour exécuter une application : code, runtime, bibliothèques et paramètres système par défaut.</p>
+      </section>
+
+      <section id="creation" className="uses">
+        <h2>Création d'Images Docker</h2>
+        <ul>
+          <li>Utilisez un fichier Dockerfile pour spécifier les instructions nécessaires à la création de l'image.</li>
+          <li>Exécutez la commande <code>docker build</code> pour construire une image à partir d'un Dockerfile.</li>
+          <li>Taguez vos images avec <code>docker tag</code> pour les identifier facilement.</li>
+        </ul>
+      </section>
+
+      <section id="utilisation" className="examples">
+        <h2>Utilisation des Images Docker</h2>
+        <ul>
+          <li>Déployez des conteneurs avec <code>docker run</code> en utilisant une image Docker.</li>
+          <li>Partagez vos images via Docker Hub ou d'autres registres Docker.</li>
+          <li>Utilisez <code>docker pull</code> pour récupérer des images depuis un registre.</li>
+        </ul>
+      </section>
+
+      <section id="exemples" className="exampleGit">
+        <h2>Exemples Pratiques</h2>
+        <div className="commandeGit">
+          <p className="titreCommandeGit">Exemple de Dockerfile :</p>
+          <pre>
+            <code>
+              {`FROM node:14
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY . .
+CMD ["node", "app.js"]`}
+            </code>
+          </pre>
+        </div>
+        <div className="commandeGit">
+          <p className="titreCommandeGit">Commande pour créer une image :</p>
+          <pre>
+            <code>docker build -t mon-image .</code>
+          </pre>
+        </div>
+        <div className="commandeGit">
+          <p className="titreCommandeGit">Commande pour exécuter un conteneur :</p>
+          <pre>
+            <code>docker run -p 3000:3000 mon-image</code>
+          </pre>
+        </div>
+      </section>
+
+      <footer>
+        <nav>
+          <ul>
+            <li><a href="#definition">Début</a></li>
+            <li><a href="#creation">Créer des Images</a></li>
+            <li><a href="#utilisation">Utilisation</a></li>
+            <li><a href="#exemples">Exemples</a></li>
+          </ul>
+        </nav>
+        <p>&copy; 2023 Formation Docker</p>
+      </footer>
+    </div>
+  );
+};
+
+export default DockerImagesTraining;
