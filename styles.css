@@ -27,7 +27,7 @@ nav {
     top: 80px; /* Positionnée juste en dessous du titre principal */
     left: 0;
     width: 100%; /* Prendre toute la largeur */
-    z-index: 1000; /* Assurer que la barre est au-dessus d'autres contenus */
+    z-index: 100; /* Assurer que la barre est au-dessus d'autres contenus */
 }
 
 .navbar {
