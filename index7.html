@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apprentissage des Commandes Git</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div id="top"></div>
+    <div class="container">
+        <h1>Apprentissage des Commandes Git</h1>
+
+        <!-- Barre de navigation -->
+        <nav>
+            <ul class="navbar">
+                <li><a href="#checkout">Checkout</a></li>
+                <li><a href="#branch">Branch</a></li>
+                <li><a href="#merge">Merge</a></li>
+                <li><a href="#rebase">Rebase</a></li>
+                <li><a href="#detach">Détacher HEAD</a></li>
+                <li><a href="#references">Références Relatives</a></li>
+                <li><a href="#force">Forcer les Branches</a></li>
+                <li><a href="#reset">Annuler des Changements</a></li>
+                <li><a href="#hashes">Hashes</a></li>
+            </ul>
+        </nav>
+
+        <section id="checkout">
+            <h2>Checkout <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> La commande <code>git checkout</code> permet de se positionner sur une branche ou un commit spécifique.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git checkout <nom_de_branche></code></p>
+        </section>
+
+        <section id="branch">
+            <h2>Branch <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> La commande <code>git branch</code> est utilisée pour créer une nouvelle branche.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git branch <nom_de_branche></code></p>
+        </section>
+
+        <section id="merge">
+            <h2>Merge <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> La commande <code>git merge</code> permet de fusionner une branche dans la branche courante.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git merge <nom_de_branche></code></p>
+        </section>
+
+        <section id="rebase">
+            <h2>Rebase <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> La commande <code>git rebase</code> permet de déplacer une branche sur un autre commit.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git rebase <nom_de_branche></code></p>
+        </section>
+
+        <section id="detach">
+            <h2>Détacher HEAD <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> Détacher HEAD signifie pointer HEAD vers un commit spécifique sans être sur une branche.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git checkout <commit_hash></code></p>
+        </section>
+
+        <section id="references">
+            <h2>Références Relatives <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> Les références relatives permettent de se déplacer dans l'historique des commits.</p>
+            <p class="exampleGit"><strong>Exemples :</strong></p>
+            <ul>
+                <li><code>git checkout main^</code></li>
+                <li><code>git checkout HEAD~4</code></li>
+            </ul>
+        </section>
+
+        <section id="force">
+            <h2>Forcer les Branches <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> On peut réassigner une branche à un commit spécifique avec l'option <code>-f</code>.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> <code>git branch -f main HEAD~3</code></p>
+        </section>
+
+        <section id="reset">
+            <h2>Annuler des Changements <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> La commande <code>git reset</code> permet d'annuler des changements.</p>
+            <p class="exampleGit"><strong>Exemples :</strong></p>
+            <ul>
+                <li><code>git reset HEAD~1</code></li>
+                <li><code>git revert <commit_hash></code></li>
+            </ul>
+        </section>
+
+        <section id="hashes">
+            <h2>Hashes <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p class="definition"><strong>Définition :</strong> Les hashes sont des identifiants uniques pour chaque commit.</p>
+            <p class="exampleGit"><strong>Exemple :</strong> Utilisez le hash pour identifier un commit : <code>git checkout <commit_hash></code></p>
+        </section>
+
+        <section>
+            <h2>Conclusion <a href="#top" class="icon"><i class="fas fa-arrow-up"></i></a></h2>
+            <p>Ces commandes Git sont essentielles pour la gestion de votre code. En les maîtrisant, vous serez en mesure de manipuler efficacement votre historique de code et de collaborer avec d'autres développeurs.</p>
+        </section>
+    </div>
+
+    <footer id="footer">
+        <ul>
+            <li><a href="https://philippe-67.github.io/index.html">Retourner à la page README</a></li>
+        </ul>
+    </footer>
+</body>
+</html>
