@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Fiche Authentification JWT - .NET + React</title>
+<style>
+body {
+font-family: 'Segoe UI', sans-serif;
+background-color: #f4f7fa;
+color: #333;
+padding: 40px;
+line-height: 1.6;
+}
+
+h1, h2, h3 {
+color: #1a73e8;
+}
+
+code {
+background-color: #e3e3e3;
+padding: 2px 6px;
+border-radius: 4px;
+font-size: 0.95em;
+}
+
+pre {
+background: #272822;
+color: #f8f8f2;
+padding: 16px;
+border-radius: 8px;
+overflow-x: auto;
+margin-bottom: 20px;
+}
+
+section {
+background-color: white;
+border-radius: 10px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+padding: 30px;
+margin-bottom: 30px;
+}
+
+ul {
+list-style-type: "✅ ";
+padding-left: 20px;
+}
+
+.tip {
+background-color: #e8f0fe;
+padding: 10px;
+border-left: 4px solid #1a73e8;
+margin-bottom: 20px;
+}
+
+.code-inline {
+background: #f1f1f1;
+padding: 2px 5px;
+border-radius: 4px;
+font-family: monospace;
+}
+</style>
+</head>
+<body>
+
+<h1>🛡️ Fiche Authentification JWT - .NET + React</h1>
+
+<section>
+<h2>1. Objectif</h2>
+<ul>
+<li>Enregistrement avec mot de passe sécurisé (BCrypt)</li>
+<li>Connexion avec génération d’un <code>JWT</code> token</li>
+<li>Protection des routes avec <code>[Authorize]</code></li>
+<li>Stockage des utilisateurs dans MongoDB</li>
+</ul>
+</section>
+
+<section>
+<h2>2. Register - Backend (.NET)</h2>
+<div class="tip">Hachage du mot de passe</div>
+<pre>
+string hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+</pre>
+<p>→ On stocke <code>hashedPassword</code> dans MongoDB</p>
+</section>
+
+<section>
+<h2>3. Login - Backend (.NET)</h2>
+<div class="tip">Vérification et génération du token</div>
+<pre>
+bool isValid = BCrypt.Net.BCrypt.Verify(input.Password, user.Password);
+var token = new JwtSecurityToken(
+claims: claims,
+expires: DateTime.Now.AddHours(1),
+signingCredentials: creds
+);
+</pre>
+</section>
+
+<section>
+<h2>4. Configuration JWT - Middleware</h2>
+<pre>
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options => {
+options.TokenValidationParameters = new TokenValidationParameters {
+ValidateIssuerSigningKey = true,
+IssuerSigningKey = new SymmetricSecurityKey(
+Encoding.UTF8.GetBytes(config["JWT_SECRET"])),
+ValidateIssuer = false,
+ValidateAudience = false
+};
+});
+
+app.UseAuthentication();
+app.UseAuthorization();
+</pre>
+</section>
+
+<section>
+<h2>5. Côté Frontend (React)</h2>
+<h3>Stockage du token après Login :</h3>
+<pre>
+localStorage.setItem("token", response.token);
+</pre>
+
+<h3>Utilisation du token pour appel API :</h3>
+<pre>
+fetch("/api/add-word", {
+method: "POST",
+headers: {
+"Authorization": `Bearer ${token}`,
+"Content-Type": "application/json"
+},
+body: JSON.stringify(data)
+});
+</pre>
+</section>
+
+<section>
+<h2>6. Fichier .env (Backend)</h2>
+<pre>
+JWT_SECRET=MaSuperCléUltraSecrète123
+MONGO_URI=mongodb://localhost:27017/ma_base
+</pre>
+<pre>
+builder.Configuration.AddEnvironmentVariables();
+</pre>
+</section>
+
+<section>
+<h2>7. Bonnes pratiques sécurité</h2>
+<ul>
+<li>Ne jamais stocker de mot de passe en clair</li>
+<li>Vérifier la signature du JWT à chaque requête</li>
+<li>Utiliser HTTPS</li>
+<li>Ne pas commit le fichier <code>.env</code></li>
+<li>Limiter la durée de vie des tokens</li>
+</ul>
+</section>
+
+</body>
+</html>
