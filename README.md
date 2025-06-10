@@ -13,3 +13,5 @@
 [Création d'une Application React avec Vite](https://philippe-67.github.io/index5.html)
 
 [Introduction aux images docker ou podman](https://philippe-67.github.io/index6.html)
+
+[Introduction à l'authentification ](https://philippe-67.github.io/index8)
