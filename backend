@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>stdin</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #1a1a1a;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<h1
+id="fiche-pratique--structure-dun-projet-backend-net-dans-une-solution-sln">Fiche
+pratique – Structure d’un projet backend .NET (dans une solution
+.sln)</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Cette fiche décrit la structure typique d’un projet backend .NET
+(API) contenu dans une solution Visual Studio (.sln). Tu y trouveras le
+rôle de chaque dossier et fichier important, pour mieux comprendre
+l’organisation d’un projet .NET moderne.</p>
+<hr />
+<h2 id="structure-générale-dun-projet-backend-net">Structure générale
+d’un projet backend .NET</h2>
+<pre><code>MonApi/                  ← Dossier du projet backend (API)
+├── Controllers/         ← Contient les contrôleurs (logique des routes API)
+├── Properties/          ← Fichiers de configuration du projet (ex : launchSettings.json)
+├── appsettings.json     ← Fichier de configuration principal (paramètres, connexions...)
+├── appsettings.Development.json ← Config spécifique au mode développement
+├── MonApi.csproj        ← Fichier projet .NET (références, dépendances...)
+├── Program.cs           ← Point d’entrée de l’application (configuration, démarrage)
+├── bin/                 ← Dossier de sortie des fichiers compilés (généré automatiquement)
+├── obj/                 ← Dossier temporaire pour la compilation (généré automatiquement)
+└── ...                  ← Autres fichiers/dossiers selon les besoins</code></pre>
+<hr />
+<h2 id="détail-des-dossiers-et-fichiers">Détail des dossiers et
+fichiers</h2>
+<h3 id="1-controllers">1. Controllers/</h3>
+<ul>
+<li><p>Contient les fichiers “contrôleurs” (ex :
+<code>WeatherForecastController.cs</code>).</p></li>
+<li><p>Chaque contrôleur gère un ensemble de routes API (ex :
+/weatherforecast).</p></li>
+<li><p>C’est ici que tu écris la logique pour répondre aux requêtes
+HTTP.</p>
+<h4 id="zoom-sur-le-dossier-controllers-et-un-contrôleur-type">Zoom sur
+le dossier Controllers/ et un contrôleur type</h4>
+<p>Ce zoom t'explique comment fonctionne un contrôleur dans .NET :
+comment il reçoit une requête, traite la logique, et renvoie une
+réponse.</p></li>
+<li><p>Un contrôleur est une classe C# qui hérite de
+<code>ControllerBase</code> ou <code>Controller</code>.</p></li>
+<li><p>Chaque méthode publique (appelée "action") correspond à une route
+HTTP (GET, POST, etc.).</p></li>
+<li><p>Exemple simplifié :</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode csharp"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">[</span>ApiController<span class="op">]</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">[</span><span class="fu">Route</span><span class="op">(</span><span class="st">&quot;[controller]&quot;</span><span class="op">)]</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> WeatherForecastController <span class="op">:</span> ControllerBase</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">[</span>HttpGet<span class="op">]</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> IEnumerable<span class="op">&lt;</span>WeatherForecast<span class="op">&gt;</span> <span class="fu">Get</span><span class="op">()</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Logique pour retourner des données météo</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div></li>
+<li><p>Les attributs <code>[HttpGet]</code>, <code>[HttpPost]</code>,
+etc. définissent le type de requête accepté.</p></li>
+<li><p>Les contrôleurs sont le point d'entrée de toutes les requêtes
+API.</p>
+<h3 id="2-properties">2. Properties/</h3></li>
+<li><p>Contient généralement <code>launchSettings.json</code>.</p></li>
+<li><p>Ce fichier définit comment l’application démarre en local
+(profils, ports, variables d’environnement).</p>
+<h4 id="zoom-sur-launchsettingsjson">Zoom sur launchSettings.json</h4>
+<p>Ce zoom t'explique comment personnaliser le lancement de ton
+application en local (port, variables d'environnement, profils de
+démarrage).</p></li>
+<li><p>Fichier JSON généré automatiquement par Visual Studio ou VS
+Code.</p></li>
+<li><p>Permet de définir plusieurs profils de lancement (ex : IIS
+Express, Kestrel, Docker).</p></li>
+<li><p>Exemple de contenu :</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;profiles&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;MonApi&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;commandName&quot;</span><span class="fu">:</span> <span class="st">&quot;Project&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;dotnetRunMessages&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;launchBrowser&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;applicationUrl&quot;</span><span class="fu">:</span> <span class="st">&quot;https://localhost:5001;http://localhost:5000&quot;</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;environmentVariables&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="dt">&quot;ASPNETCORE_ENVIRONMENT&quot;</span><span class="fu">:</span> <span class="st">&quot;Development&quot;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      <span class="fu">}</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></li>
+<li><p>On peut y changer le port, ajouter des variables d'environnement,
+activer/désactiver l'ouverture automatique du navigateur, etc.</p>
+<h3 id="3-appsettingsjson">3. appsettings.json</h3></li>
+<li><p>Fichier de configuration principal (format JSON).</p></li>
+<li><p>Sert à stocker les paramètres de l’application (connexion à la
+base, clés API, options diverses).</p>
+<h4 id="zoom-sur-appsettingsjson-et-appsettingsdevelopmentjson">Zoom sur
+appsettings.json et appsettings.Development.json</h4>
+<p>Ce zoom t'explique comment configurer ton application sans toucher au
+code, et comment séparer les réglages de développement et de
+production.</p></li>
+<li><p><code>appsettings.json</code> contient les paramètres globaux :
+chaînes de connexion, options personnalisées, clés API, etc.</p></li>
+<li><p><code>appsettings.Development.json</code> surcharge certains
+paramètres quand tu es en mode développement (ex : base de test, logs
+plus détaillés).</p></li>
+<li><p>Exemple de contenu :</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;ConnectionStrings&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;DefaultConnection&quot;</span><span class="fu">:</span> <span class="st">&quot;mongodb://localhost:27017/monappdb&quot;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;Logging&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;LogLevel&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      <span class="dt">&quot;Default&quot;</span><span class="fu">:</span> <span class="st">&quot;Information&quot;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">}</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></li>
+<li><p>On accède à ces paramètres dans le code via l'injection de
+dépendances ou <code>Configuration["MaCle"]</code>.</p></li>
+<li><p>Ne jamais mettre de secrets de production dans ces fichiers :
+utiliser des variables d'environnement pour cela.</p>
+<h3 id="4-appsettingsdevelopmentjson">4.
+appsettings.Development.json</h3></li>
+<li><p>Surchage les paramètres de <code>appsettings.json</code> en mode
+développement.</p></li>
+<li><p>Pratique pour avoir des réglages différents en local (ex : base
+de données de test).</p></li>
+</ul>
+<h3 id="5-monapicsproj">5. MonApi.csproj</h3>
+<ul>
+<li><p>Fichier projet .NET (XML).</p></li>
+<li><p>Liste les dépendances NuGet, les frameworks utilisés, les options
+de build, etc.</p></li>
+<li><p>C’est le “cœur” du projet pour .NET.</p>
+<h4 id="zoom-sur-monapicsproj">Zoom sur MonApi.csproj</h4>
+<p>Ce zoom t'explique comment ce fichier structure le projet, gère les
+dépendances et le framework utilisé.</p></li>
+<li><p>C'est un fichier XML qui décrit :</p>
+<ul>
+<li>Le nom du projet, la version du framework (ex : net8.0)</li>
+<li>Les packages NuGet utilisés (ex : MongoDB.Driver,
+Swashbuckle.AspNetCore)</li>
+<li>Les options de build, les fichiers inclus/exclus</li>
+</ul></li>
+<li><p>Exemple de dépendance ajoutée :</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode xml"><code class="sourceCode xml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">ItemGroup</span>&gt;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">PackageReference</span> <span class="ot">Include=</span><span class="st">&quot;MongoDB.Driver&quot;</span> <span class="ot">Version=</span><span class="st">&quot;2.19.0&quot;</span> /&gt;</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">ItemGroup</span>&gt;</span></code></pre></div></li>
+<li><p>Pour ajouter une librairie, on utilise la commande
+<code>dotnet add package NomDuPackage</code> qui modifie ce
+fichier.</p></li>
+<li><p>Ce fichier ne doit jamais être modifié à la main sauf cas
+avancé.</p>
+<h3 id="6-programcs">6. Program.cs</h3></li>
+<li><p>Point d’entrée de l’application.</p></li>
+<li><p>Configure les services, les middlewares, et démarre le serveur
+web.</p></li>
+<li><p>Depuis .NET 6, ce fichier est souvent très court grâce au
+“minimal hosting model”.</p></li>
+</ul>
+<h4
+id="zoom-sur-un-programcs-typique-dune-api-net-moderne-exemple-mapremiereapplicationweb">Zoom
+sur un Program.cs typique d’une API .NET moderne (exemple
+MaPremiereApplicationWeb)</h4>
+<p>Voici ce que l’on retrouve généralement :</p>
+<ul>
+<li><p><strong>Configuration du CORS</strong> : Permet d’autoriser les
+requêtes venant d’autres applications (ex : le frontend React).
+Exemple :
+<code>csharp   builder.Services.AddCors(options =&gt;   {           options.AddDefaultPolicy(policy =&gt;           {                   policy.AllowAnyOrigin()                               .AllowAnyHeader()                               .AllowAnyMethod();           });   });</code></p></li>
+<li><p><strong>Ajout des services principaux</strong> :</p>
+<ul>
+<li><code>AddControllers()</code> : Active la gestion des routes via les
+contrôleurs (dossier Controllers/)</li>
+<li><code>AddEndpointsApiExplorer()</code> et
+<code>AddSwaggerGen()</code> : Préparent la documentation interactive de
+l’API (Swagger)</li>
+</ul></li>
+<li><p><strong>Construction de l’application</strong> :</p>
+<ul>
+<li><code>var app = builder.Build();</code> crée l’application à partir
+de la configuration</li>
+</ul></li>
+<li><p><strong>Activation de Swagger en développement</strong> :</p>
+<ul>
+<li>Permet de tester facilement l’API via une interface web</li>
+</ul></li>
+<li><p><strong>Activation du CORS</strong> :</p>
+<ul>
+<li><code>app.UseCors();</code> autorise les requêtes du frontend</li>
+</ul></li>
+<li><p><strong>Middlewares standards</strong> :</p>
+<ul>
+<li><code>UseHttpsRedirection()</code> : Force l’utilisation du
+HTTPS</li>
+<li><code>UseAuthorization()</code> : Gère
+l’authentification/autorisation (si besoin)</li>
+</ul></li>
+<li><p><strong>Branchement des contrôleurs</strong> :</p>
+<ul>
+<li><code>app.MapControllers();</code> relie toutes les routes définies
+dans le dossier Controllers/</li>
+</ul></li>
+<li><p><strong>Lancement de l’application</strong> :</p>
+<ul>
+<li><code>app.Run();</code> démarre le serveur web</li>
+</ul></li>
+<li><p><strong>Définition de types internes (optionnel)</strong> :</p>
+<ul>
+<li>Parfois, des types simples (ex : record WeatherForecast) sont
+définis à la fin du fichier pour des besoins de test ou d’exemple</li>
+</ul></li>
+</ul>
+<p>Ce modèle rend la configuration claire, concise et adaptée à la
+plupart des projets d’API .NET modernes.</p>
+<h3 id="7-bin">7. bin/</h3>
+<ul>
+<li>Dossier généré automatiquement à la compilation.</li>
+<li>Contient les fichiers exécutables et les DLLs du projet.</li>
+<li>À ne jamais versionner sur GitHub (à ignorer dans .gitignore).</li>
+</ul>
+<h3 id="8-obj">8. obj/</h3>
+<ul>
+<li>Dossier temporaire utilisé lors de la compilation.</li>
+<li>Contient des fichiers intermédiaires, jamais à modifier ni à
+versionner.</li>
+</ul>
+<hr />
+<h2 id="autres-éléments-possibles">Autres éléments possibles</h2>
+<ul>
+<li><strong>wwwroot/</strong> : Dossier pour les fichiers statiques
+(images, JS, CSS) si besoin.</li>
+<li><strong>Migrations/</strong> : Dossier créé par Entity Framework
+pour gérer les migrations de base de données.</li>
+<li><strong>Fichiers .http</strong> : Pour tester les routes API
+directement depuis VS Code.</li>
+</ul>
+<hr />
+<h2 id="bonnes-pratiques">Bonnes pratiques</h2>
+<ul>
+<li>Ne jamais modifier ou versionner les dossiers <code>bin/</code> et
+<code>obj/</code>.</li>
+<li>Documenter la configuration dans le README.md.</li>
+<li>Organiser les contrôleurs et services dans des dossiers dédiés si le
+projet grandit.</li>
+</ul>
+<hr />
+<p>Cette fiche t’aide à te repérer dans un projet backend .NET et à
+comprendre le rôle de chaque élément clé.</p>
+</body>
+</html>
