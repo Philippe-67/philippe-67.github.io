@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Organisation d'un projet React/TypeScript</title>
+<!-- Styles généraux -->
+<style>
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #fdfdfd;
+    color: #1a1a1a;
+}
+h1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0;
+    z-index: 1001;
+    font-size: 1.8em;
+}
+nav {
+    background-color: #4CAF50;
+    padding: 15px;
+    position: fixed;
+    top: 50px; /* sous le titre */
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.navbar li {
+    margin: 0 10px;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.navbar a:hover {
+    text-decoration: underline;
+}
+.container {
+    max-width: 1200px;
+    margin: 150px auto 50px; /* espace en dessous de la nav fixe */
+    padding: 20px;
+}
+h2 {
+    margin-top: 50px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+h3 {
+    margin-top: 30px;
+    color: #333;
+}
+pre {
+    background-color: #e0e0e0;
+    padding: 10px;
+    overflow-x: auto;
+    border-radius: 4px;
+}
+.sourceCode {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+section {
+    margin-bottom: 50px;
+}
+ul {
+    margin-left: 20px;
+}
+li {
+    margin-bottom: 10px;
+}
+/* Style pour les zooms ou détails approfondis */
+.zoom-section {
+    background-color: #fff;
+    border: 1px solid #999;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.95em;
+}
+.zoom-section h4 {
+    margin-top: 0;
+    color: #007BFF;
+}
+.icon {
+    margin-left: 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+#top {
+    position: absolute;
+    top: 0;
+}
+</style>
+<!-- Font Awesome pour les icônes -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+
+<div id="top"></div>
+
+<!-- Barre de navigation -->
+<nav>
+  <ul class="navbar">
+    <li><a href="#structure">Structure générale</a></li>
+    <li><a href="#public">public/</a></li>
+    <li><a href="#src">src/</a></li>
+    <li><a href="#app">App.tsx</a></li>
+    <li><a href="#index">index.tsx</a></li>
+    <li><a href="#packagejson">package.json</a></li>
+    <li><a href="#autres">Autres éléments</a></li>
+    <li><a href="#bonnes-pratiques">Bonnes pratiques</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+<h1>Organisation et Structure d’un projet React/TypeScript</h1>
+
+<!-- 1. Structure générale -->
+<section id="structure">
+<h2>1. Structure générale d’un projet React/TypeScript</h2>
+<p>Ce projet créé par <code>create-react-app</code> a une organisation typique :</p>
+<pre><code>frontend/
+├── public/
+├── src/
+├── node_modules/
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── ...</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Organisation du dossier racine</h4>
+<p>Ce dossier contient :</p>
+<ul>
+  <li><strong>public/</strong> : Fichiers statiques (HTML, images).</li>
+  <li><strong>src/</strong> : Code source React, composants, styles, etc.</li>
+  <li><strong>node_modules/</strong> : Dépendances npm.</li>
+  <li><strong>package.json</strong> : Dépendances et scripts npm.</li>
+  <li><strong>tsconfig.json</strong> : Configuration TypeScript.</li>
+</ul>
+</div>
+</section>
+
+<!-- 2. public/ -->
+<section id="public">
+<h2>2. Dossier <code>public/</code></h2>
+<p>Fichiers statiques, accessible directement par le serveur web :</p>
+<pre><code class="sourceCode html">&lt;!DOCTYPE html&gt;
+&lt;html lang="fr"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Ma Première Application Web&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div id="root"&gt;&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Fonction du fichier index.html</h4>
+<p>C’est la page HTML de base contenant <code>&lt;div id="root"&gt;</code> où React monte l’application.</p>
+<p>Ce fichier ne sera pas modifié par Webpack, il sert de template d’accueil.</p>
+</div>
+</section>
+
+<!-- 3. src/ -->
+<section id="src">
+<h2>3. Dossier <code>src/</code></h2>
+<p>Tout le code React, composants, styles, logique métier :</p>
+<ul>
+  <li><strong>src/components/</strong> : composants réutilisables.</li>
+  <li><strong>src/pages/</strong> : composants de pages (ex : Home, About).</li>
+  <li><strong>src/services/</strong> : appels API.</li>
+  <li><strong>src/types/</strong> : définitions TypeScript.</li>
+</ul>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Organisation de src/</h4>
+<p>Ce zoom vous aide à structurer votre dossier :</p>
+<ul>
+  <li><strong>components/</strong> : composants réutilisables.</li>
+  <li><strong>pages/</strong> : composants de pages majeures.</li>
+  <li><strong>services/</strong> : API et logique métier.</li>
+  <li><strong>types/</strong> : interfaces et types TypeScript.</li>
+</ul>
+</div>
+</section>
+
+<!-- 4. App.tsx -->
+<section id="app">
+<h2>4. Fichier <code>App.tsx</code></h2>
+<p>Composant racine de l’application React :</p>
+<pre><code class="sourceCode typescript">
+function App() {
+  return (
+    &lt;div className="App"&gt;
+      &lt;h1&gt;Bienvenue dans mon app !&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+export default App;
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Fonction d’App.tsx</h4>
+<p>Ce composant organise la structure principale de votre site ou application.</p>
+<p>Il peut inclure des routes, des barres de navigation, etc.</p>
+</div>
+</section>
+
+<!-- 5. index.tsx -->
+<section id="index">
+<h2>5. Fichier <code>index.tsx</code></h2>
+<p>Point d’entrée de React, il monte le composant App dans le DOM :</p>
+<pre><code class="sourceCode typescript">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
+  &lt;React.StrictMode&gt;
+    &lt;App /&gt;
+  &lt;/React.StrictMode&gt;
+);
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Démarrage de React</h4>
+<p>Ce fichier initialise React et affiche le composant racine dans <code>&lt;div id="root"&gt;</code>.</p>
+<p>Il utilise <code>ReactDOM.createRoot</code> et le mode Strict pour le développement.</p>
+</div>
+</section>
+
+<!-- 6. package.json -->
+<section id="packagejson">
+<h2>6. Fichier <code>package.json</code></h2>
+<p>Contient :</p>
+<ul>
+  <li>Les dépendances npm (react, react-dom, typescript...)</li>
+  <li>Les scripts (start, build, test)</li>
+</ul>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Gestion des dépendances et scripts</h4>
+<p>Exemple :</p>
+<pre><code class="sourceCode json">
+{
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
+  },
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "typescript": "^4.9.0"
+  }
+}
+</code></pre>
+</div>
+</section>
+
+<!-- 7. tsconfig.json -->
+<section id="tsconfigjson">
+<h2>7. Fichier <code>tsconfig.json</code></h2>
+<p>Configure TypeScript pour le projet :</p>
+<pre><code class="sourceCode json">
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "jsx": "react-jsx",
+    "strict": true
+  }
+}
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Configuration TypeScript</h4>
+<p>Ce fichier définit :</p>
+<ul>
+  <li>La version JavaScript cible.</li>
+  <li>La gestion du JSX.</li>
+  <li>Les vérifications strictes.</li>
+</ul>
+</div>
+</section>
+
+<!-- 8. node_modules/ et package-lock.json -->
+<section id="autres">
+<h2>Autres éléments</h2>
+<ul>
+  <li><strong>node_modules/</strong> : dépendances, à ne pas versionner.</li>
+  <li><strong>package-lock.json</strong> : verrouille versions pour la reproductibilité.</li>
+  <li><strong>.env.local</strong> : variables d’environnement locales.</li>
+</ul>
+</section>
+
+<!-- Bonnes pratiques -->
+<section id="bonnes-pratiques">
+<h2>Bonnes pratiques</h2>
+<ul>
+  <li>Organiser composants par fonctionnalités.</li>
+  <li>Noms clairs pour fichiers et composants.</li>
+  <li>Séparer logique métier et composants UI.</li>
+  <li>Utiliser variables d’environnement pour URLs, clés sensibles.</li>
+  <li>Faire des commits réguliers avec des messages explicites.</li>
+</ul>
+</section>
+
+<!-- Conclusion -->
+<section id="conclusion">
+<h2>Conclusion</h2>
+<p>Ce guide vous aide à comprendre la structure d’un projet React/TypeScript, avec ses composants clés et leur rôle.</p>
+<p>Les sections "zoom" approfondissent chaque aspect pour mieux maîtriser leur fonctionnement.</p>
+</section>
+
+</div>
+
+<!-- Pied de page -->
+<footer style="text-align:center; padding:20px; background:#4CAF50; color:#fff;">
+  <a href="https://philippe-67.github.io/index.html" style="color:#fff;">Retourner à la page README</a>
+</footer>
+
+</body>
+</html>
