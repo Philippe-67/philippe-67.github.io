@@ -18,4 +18,4 @@
 
 [Introduction à la structure d'un projet Backend ](https://philippe-67.github.io/backend.html)
 
-[Introduction à la structure d'un projet Frontend ](https://philippe-67.github.io/frontend.html)
+[Introduction à la structure d'un projet Frontend ](https://philippe-67.github.io/Frontend.html)
