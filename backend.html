@@ -4,11 +4,122 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Structure d’un projet backend .NET</title>
-<link rel="stylesheet" href="styles.css"> <!-- ton CSS personnalisé -->
-<!-- Ajoute Font Awesome pour les icônes -->
+<!-- Style principal -->
+<style>
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+h1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    z-index: 1001;
+    padding: 10px 0;
+    margin: 0;
+}
+nav {
+    background-color: #4CAF50;
+    padding: 15px;
+    position: fixed;
+    top: 50px; /* en dessous de h1 */
+    left: 0;
+    width: 100%;
+    z-index: 100;
+}
+.navbar {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.navbar li {
+    margin: 0 10px;
+}
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+.navbar a:hover {
+    text-decoration: underline;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 1200px;
+    margin: 150px auto 50px; /* en dessous de la nav fixe */
+    padding: 20px;
+}
+h2 {
+    margin-top: 50px;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+h3 {
+    margin-top: 30px;
+    color: #333;
+}
+pre {
+    background-color: #e0e0e0;
+    padding: 10px;
+    overflow-x: auto;
+    border-radius: 4px;
+}
+.sourceCode {
+    font-family: monospace;
+    font-size: 0.9em;
+}
+section {
+    margin-bottom: 50px;
+}
+ul {
+    margin-left: 20px;
+}
+li {
+    margin-bottom: 10px;
+}
+
+/* Style pour les "Zoom" ou détails approfondis */
+.zoom-section {
+    background-color: #fff;
+    border: 1px solid #999;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 0.95em;
+}
+.zoom-section h4 {
+    margin-top: 0;
+    color: #007BFF;
+}
+.icon {
+    margin-left: 10px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
+/* Style pour la zone d'ancrage (pour remonter en haut) */
+#top {
+    position: absolute;
+    top: 0;
+}
+</style>
+<!-- Font Awesome pour les icônes -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 </head>
 <body>
+
 <div id="top"></div>
 
 <!-- Barre de navigation -->
@@ -20,6 +131,7 @@
     <li><a href="#appsettings">Appsettings</a></li>
     <li><a href="#csproj">Fichier .csproj</a></li>
     <li><a href="#program">Program.cs</a></li>
+    <li><a href="#conclusion">Conclusion</a></li>
   </ul>
 </nav>
 
@@ -27,7 +139,7 @@
 
 <h1>Structure d’un projet backend .NET dans une solution Visual Studio</h1>
 
-<!-- Section 1 : Structure générale -->
+<!-- 1. Structure générale -->
 <section id="structure">
 <h2>1. Structure générale d’un projet backend .NET</h2>
 <p>Ce dossier contient tous les fichiers principaux du projet :</p>
@@ -40,15 +152,26 @@
 ├── Program.cs
 ├── bin/
 └── obj/</code></pre>
-<p>Chaque dossier ou fichier a un rôle précis dans l’organisation du projet.</p>
+<p>Chaque élément a un rôle précis dans l’organisation du projet.</p>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Organisation du dossier racine</h4>
+<p>Ce dossier racine contient la structure de base d’un projet .NET :</p>
+<ul>
+  <li><strong>Controllers/</strong> : Contient la logique des API (endpoints).</li>
+  <li><strong>Properties/</strong> : Fichiers de configuration pour le démarrage.</li>
+  <li><strong>appsettings.json</strong> : Paramètres globaux.</li>
+  <li><strong>.csproj</strong> : Définition du projet et des dépendances.</li>
+  <li><strong>Program.cs</strong> : Point d’entrée et configuration de l’application.</li>
+</ul>
+</div>
 </section>
 
-<!-- Section 2 : Controllers -->
+<!-- 2. Détail des contrôleurs -->
 <section id="controllers">
 <h2>2. Détail des contrôleurs (Controllers/)</h2>
-<p>Les contrôleurs gèrent les routes API et la logique métier.</p>
-<h3>Exemple :</h3>
-<div class="sourceCode"><pre class="sourceCode csharp"><code class="sourceCode cs">
+<p>Les contrôleurs gèrent les routes API et la logique métier :</p>
+<pre><code class="sourceCode cs">
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
@@ -59,15 +182,31 @@ public class WeatherForecastController : ControllerBase
         // Logique pour retourner des données météo
     }
 }
-</code></pre></div>
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Fonctionnement d’un contrôleur</h4>
+<p>Un contrôleur est une classe C# qui hérite de <code>ControllerBase</code> ou <code>Controller</code>.</p>
+<ul>
+  <li>Les méthodes publiques (actions) correspondent à des routes HTTP (GET, POST, etc.).</li>
+  <li>Les attributs comme <code>[HttpGet]</code> précisent le type de requête accepté.</li>
+</ul>
+<p>Exemple :</p>
+<pre><code class="sourceCode cs">
+[HttpGet]
+public IEnumerable<WeatherForecast> Get()
+{
+    // Retourne la météo
+}
+</code></pre>
+</div>
 </section>
 
-<!-- Section 3 : Properties -->
+<!-- 3. Properties -->
 <section id="properties">
 <h2>3. Dossier Properties (Properties/)</h2>
-<p>Contient principalement <code>launchSettings.json</code>, qui configure le démarrage local.</p>
-<h3>Exemple de launchSettings.json :</h3>
-<div class="sourceCode"><pre class="sourceCode json">
+<p>Contient principalement <code>launchSettings.json</code> :</p>
+<pre><code class="sourceCode json">
 {
   "profiles": {
     "MonApi": {
@@ -80,15 +219,24 @@ public class WeatherForecastController : ControllerBase
     }
   }
 }
-</pre></div>
-<p>Permet de changer le port, ajouter des variables, etc.</p>
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Configuration du lancement local</h4>
+<p>Ce fichier permet de personnaliser :</p>
+<ul>
+  <li>Le port d’écoute.</li>
+  <li>Les variables d’environnement.</li>
+  <li>Le lancement automatique du navigateur.</li>
+</ul>
+</div>
 </section>
 
-<!-- Section 4 : appsettings.json -->
+<!-- 4. appsettings.json -->
 <section id="appsettings">
 <h2>4. Fichier appsettings.json</h2>
-<p>Fichier de configuration principal pour les paramètres globaux :</p>
-<div class="sourceCode"><pre class="sourceCode json">
+<p>Ce fichier JSON contient la configuration principale :</p>
+<pre><code class="sourceCode json">
 {
   "ConnectionStrings": {
     "DefaultConnection": "mongodb://localhost:27017/monappdb"
@@ -99,28 +247,45 @@ public class WeatherForecastController : ControllerBase
     }
   }
 }
-</pre></div>
-<p>Utilisé dans le code via l’injection de dépendances ou <code>Configuration["Clé"]</code>.</p>
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Paramètres globaux</h4>
+<p>Ce fichier définit :</p>
+<ul>
+  <li>Les chaînes de connexion à la base.</li>
+  <li>Les niveaux de logs.</li>
+</ul>
+<p>Attention : ne pas y mettre de secrets sensibles. Utilisez des variables d’environnement.</p>
+</div>
 </section>
 
-<!-- Section 5 : Fichier .csproj -->
+<!-- 5. MonApi.csproj -->
 <section id="csproj">
-<h2>5. MonApi.csproj</h2>
-<p>Fichier de configuration XML qui gère les dépendances NuGet et le framework utilisé.</p>
-<h3>Exemple :</h3>
-<div class="sourceCode"><pre class="sourceCode xml">
+<h2>5. Fichier MonApi.csproj</h2>
+<p>Fichier XML qui gère la configuration du projet et ses dépendances :</p>
+<pre><code class="sourceCode xml">
 <ItemGroup>
   <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
 </ItemGroup>
-</pre></div>
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Dépendances et configuration</h4>
+<p>Ce fichier :</p>
+<ul>
+  <li>Liste les packages NuGet (ex : MongoDB.Driver).</li>
+  <li>Indique le framework cible (ex : net8.0).</li>
+  <li>Gère les options de build.</li>
+</ul>
+</div>
 </section>
 
-<!-- Section 6 : Program.cs -->
+<!-- 6. Program.cs -->
 <section id="program">
-<h2>6. Program.cs</h2>
-<p>Point d’entrée de l’application, il configure les services et démarre le serveur.</p>
-<h3>Exemple typique :</h3>
-<div class="sourceCode"><pre class="sourceCode csharp">
+<h2>6. Point d’entrée : Program.cs</h2>
+<p>Ce fichier configure et démarre l’application :</p>
+<pre><code class="sourceCode csharp">
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddCors();
@@ -133,22 +298,52 @@ app.UseCors();
 app.MapControllers();
 
 app.Run();
-</pre></div>
+</code></pre>
+<!-- Zoom -->
+<div class="zoom-section">
+<h4>Zoom : Exemple d’un Program.cs moderne</h4>
+<p>Ce fichier :</p>
+<ul>
+  <li>Configure CORS pour autoriser les requêtes externes.</li>
+  <li>Ajoute les services (contrôleurs, Swagger).</li>
+  <li>Active la documentation Swagger en mode dev.</li>
+  <li>Relie les contrôleurs à l’application.</li>
+  <li>Démarre le serveur.</li>
+</ul>
+</div>
 </section>
 
-<!-- Ajoute une zone de conclusion ou de rappel -->
+<!-- 7. Dossiers bin et obj -->
 <section>
+<h2>7. Dossiers bin/ et obj/</h2>
+<ul>
+  <li><strong>bin/</strong> : fichiers compilés (exécutables, DLLs), à ignorer dans Git.</li>
+  <li><strong>obj/</strong> : fichiers temporaires, à ne pas versionner.</li>
+</ul>
+</section>
+
+<!-- 8. Autres éléments -->
+<section>
+<h2>Autres éléments possibles</h2>
+<ul>
+  <li><strong>wwwroot/</strong> : fichiers statiques (images, CSS, JS).</li>
+  <li><strong>Migrations/</strong> : gestion des migrations Entity Framework.</li>
+  <li><strong>.http</strong> : tests API dans VS Code.</li>
+</ul>
+</section>
+
+<!-- Conclusion -->
+<section id="conclusion">
 <h2>Conclusion</h2>
-<p>Ce modèle structuré permet de développer et maintenir facilement un projet backend .NET moderne, en séparant clairement chaque aspect du système.</p>
+<p>Ce guide vous aide à comprendre la structure d’un projet .NET backend, avec ses composants clés et leur rôle.</p>
+<p>Les sections "zoom" vous permettent d’approfondir chaque partie pour mieux maîtriser leur fonctionnement.</p>
 </section>
 
 </div>
 
-<!-- Footer avec lien -->
-<footer id="footer">
-  <ul>
-    <li><a href="https://philippe-67.github.io/index.html">Retourner à la page README</a></li>
-  </ul>
+<!-- Pied de page -->
+<footer id="footer" style="text-align:center; padding:20px; background:#4CAF50; color:#fff;">
+  <a href="https://philippe-67.github.io/index.html" style="color:#fff;">Retourner à la page README</a>
 </footer>
 
 </body>
